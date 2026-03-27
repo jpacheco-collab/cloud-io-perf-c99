@@ -1,3 +1,5 @@
 nob
+benchmark_sync
 generador
 *.bin
+*.old
