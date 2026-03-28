@@ -25,6 +25,12 @@ int main(int argc, char **argv)
     nob_cmd_append(&cmd, "-o", "benchmark_sync", "benchmark_sync.c");
     if (!nob_cmd_run(&cmd)) return 1;
 
+    // --- Compilar el Benchmark io_uring ---
+    cmd.count = 0;
+    nob_cmd_append(&cmd, "gcc", "-std=c99", "-Wall", "-Wextra", "-O2");
+    nob_cmd_append(&cmd, "-o", "benchmark_uring", "benchmark_uring.c");
+    if (!nob_cmd_run(&cmd)) return 1;
+    
     nob_log(NOB_INFO, "¡Compilación exitosa, José! Todo está listo para la nube.");
 
     return 0;
