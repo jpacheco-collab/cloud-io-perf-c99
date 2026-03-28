@@ -35,6 +35,12 @@ int main(int argc, char **argv)
     cmd.count = 0;
     nob_cmd_append(&cmd, "gcc", "-std=c99", "-Wunused-variable","-Wall", "-Wextra", "-O2", "-o", "bench_uring_batch", "benchmark_uring_batch.c");
     if (!nob_cmd_run(&cmd)) return 1;
+
+    // 5. Versión PRO (Optimizada para la nube)
+    cmd.count = 0;
+    nob_cmd_append(&cmd, "gcc", "-std=c99", "-O2", "-o", "bench_uring_pro", "benchmark_uring_pro.c");
+    if (!nob_cmd_run(&cmd)) return 1;
+
     
     nob_log(NOB_INFO, "¡Compilación exitosa, José! Todo está listo para la nube.");
 
