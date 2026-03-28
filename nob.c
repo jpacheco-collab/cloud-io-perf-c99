@@ -30,6 +30,11 @@ int main(int argc, char **argv)
     nob_cmd_append(&cmd, "gcc", "-std=c99", "-Wall", "-Wextra", "-O2");
     nob_cmd_append(&cmd, "-o", "benchmark_uring", "benchmark_uring.c");
     if (!nob_cmd_run(&cmd)) return 1;
+  
+    // 3. El nuevo contendiente (Batching)
+    cmd.count = 0;
+    nob_cmd_append(&cmd, "gcc", "-std=c99", "-Wunused-variable","-Wall", "-Wextra", "-O2", "-o", "bench_uring_batch", "benchmark_uring_batch.c");
+    if (!nob_cmd_run(&cmd)) return 1;
     
     nob_log(NOB_INFO, "¡Compilación exitosa, José! Todo está listo para la nube.");
 
