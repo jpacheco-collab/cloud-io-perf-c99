@@ -24,12 +24,14 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Uso: %s <archivo_datos>\n", argv[0]);
         return 1;
     }
-
+ 
     // O_DIRECT es crucial para medir rendimiento real de hardware, no de RAM
-    int fd = open(argv[1], O_RDONLY | O_DIRECT);
+    // EL CAMBIO CLAVE: Quitamos O_DIRECT para usar el Page Cache del Kernel
+    // int fd = open(argv[1], O_RDONLY | O_DIRECT);
+    int fd = open(argv[1], O_RDONLY);
     if (fd < 0) {
-        perror("Error con O_DIRECT, intentando apertura normal");
-        fd = open(argv[1], O_RDONLY);
+        perror("Error al abrir el archivo");
+        return 1;
     }
 
     struct io_uring_params params = {0};
